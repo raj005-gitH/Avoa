@@ -1,7 +1,41 @@
 <% layout('/layouts/boilerplate') %>
 
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+  <div class="col-md-6 col-lg-5 p-5 shadow-sm rounded-4 border bg-white">
+    <h2 class="text-center mb-4 fw-semibold" style="font-family: 'Circular Std', sans-serif;">Create your Wanderlust account</h2>
+
+    <form action="/signup" method="POST" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold">Username</label>
+        <input name="username" id="username" type="text" class="form-control form-control-lg" placeholder="Enter your username" required>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold">Email</label>
+        <input name="email" id="email" type="email" class="form-control form-control-lg" placeholder="you@example.com" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <input name="password" id="password" type="password" class="form-control form-control-lg" placeholder="Create a strong password" required>
+      </div>
+
+      <button type="submit" class="btn btn-dark w-100 py-2 mt-3 rounded-3">Sign Up</button>
+    </form>
+
+    <p class="text-center mt-4">
+      Already have an account? 
+      <a href="/login" class="text-decoration-none text-danger fw-semibold">Log in</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- <% layout('/layouts/boilerplate') %>
+
 <div class="row mt-3">
-    <h1 class="col-6 offset-3">SignUp on Wanderlust</h1>
+    <h1 class="col-6 offset-2">Sign Up on Wanderlust</h1>
     <div class="col-8 offset-2">
         <form action="/signup" method="POST" class="needs-validation" novalidate>
         <div class="mb-3"><br>
@@ -24,4 +58,5 @@
         <button class="btn btn-success">SignUp</button>
         </form>
     </div>
-</div>
+</div> -->
+

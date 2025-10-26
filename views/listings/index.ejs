@@ -1,142 +1,300 @@
 <% layout("/layouts/boilerplate") %>
 
-<style>
+<!-- <style>
+  /* -------- Filters & Icon Styles - No Changes -------- */
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+}
+
+.tax-info {
+    display: none;        
+}
+
+.tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* -------- Polished Listing Card Effects -------- */
+.card.listing-card {
+    background: #fff;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 18px 2px rgba(40, 55, 90, 0.13);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.22s, transform 0.18s;
+}
+
+.card.listing-card:hover,
+.card.listing-card:focus {
+    box-shadow: 0 12px 32px 5px rgba(25,32,54,0.16);
+    transform: scale(1.013) translateY(-2px);
+    z-index: 2;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: filter 0.16s, transform 0.20s;
+    filter: brightness(0.96) contrast(1.06);
+}
+
+.card.listing-card:hover .card-img-top {
+    filter: brightness(1.08) contrast(1.15) saturate(1.15);
+    transform: scale(1.035);
+}
+
+.card-body {
+    padding: 1.25rem 1rem 1rem 1rem;
+    background: #f7f8fb;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #23262b;
+    line-height: 1.7;
+}
+
+/* Responsive cards for mobile screens */
+@media (max-width: 700px) {
     #filters {
-        display: flex;
         flex-wrap: wrap;
-        align-items: center;
+        align-items: flex-start;
     }
-
-    .filter {
-        text-align: center;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        opacity: 0.7;
+    .card.listing-card,
+    .card-img-top {
+        border-radius: 0.7rem;
+        height: 10rem;
     }
-
-    .filter:hover {
-        opacity: 1;
-        cursor: pointer;
+    .card-body {
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
     }
-
-    .filter p {
-        font-size: 0.8rem;
+    .card-text {
+        font-size: 0.95rem;
     }
+}
+</style> -->
 
-    .tax-info {
-        display: none;        
-    }
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
-    .tax-toggle {
-        border: 1px solid black;
-        border-radius: 1rem;
-        height: 3.25rem;
-        padding: 1rem;
-        margin-left: 5rem;
-        display: flex;
-        align-items: center;
-    }
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
 
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: 5rem;
+    display: flex;
+    align-items: center;
+  }
+  .filters-toggle-btn {
+    background: #fff; /* Airbnb typically uses clean backgrounds */
+    color: #333;
+    border: 1.5px solid #e7e7e7;
+    box-shadow: 0 2px 8px rgba(30, 30, 30, 0.07);
+    transition: box-shadow 0.15s, border 0.15s;
+  }
+  .filters-toggle-btn:hover,
+  .filters-toggle-btn:focus {
+    border: 1.5px solid #ff5a5f; /* Airbnb red */
+    box-shadow: 0 4px 18px rgba(255, 90, 95, 0.12);
+    color: #ff5a5f;
+  }
+  .hamburger-icon svg {
+    vertical-align: middle;
+    display: inline-block;
+  }
 </style>
 
-    <div id="filters">
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-fire"></i>
-            </div>
-            <p>Trending</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-bed"></i>
-            </div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-mountain-city"></i>
-            </div>
-            <p>Iconic cities</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-mountain"></i>
-            </div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-brands fa-fort-awesome"></i>
-            </div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-person-swimming"></i>
-            </div>
-            <p>Amazing Pools</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-campground"></i>
-            </div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-tractor"></i>
-            </div>
-            <p>Farms</p>
-        </div>
-        <div class="filter">
-            <div>
-                <i class="fa-solid fa-snowflake"></i>
-            </div>
-            <p>Arctic</p>
-        </div>
-        <!-- <div class="filter">
+<button
+  class="filters-toggle-btn d-md-none mb-3 px-4 py-2 fw-semibold rounded-pill shadow-sm"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#filtersCollapse"
+  aria-expanded="false"
+  aria-controls="filtersCollapse"
+>
+  <span class="hamburger-icon me-2" aria-hidden="true">
+    <!-- Custom hamburger icon (SVG for crispness) -->
+    <svg width="28" height="28" viewBox="0 0 24 24">
+      <rect y="5" width="24" height="2" rx="1.2" fill="#333" />
+      <rect y="11" width="24" height="2" rx="1.2" fill="#333" />
+      <rect y="17" width="24" height="2" rx="1.2" fill="#333" />
+    </svg>
+  </span>
+  <i>Filters</i>
+</button>
+
+<!-- Filters Section -->
+<div class="filters collapse d-md-block" id="filtersCollapse">
+  <!-- Your filter elements go here -->
+  <div id="filters">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-fire"></i>
+      </div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-bed"></i>
+      </div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-mountain-city"></i>
+      </div>
+      <p>Iconic cities</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-mountain"></i>
+      </div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-brands fa-fort-awesome"></i>
+      </div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-person-swimming"></i>
+      </div>
+      <p>Amazing Pools</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-campground"></i>
+      </div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-tractor"></i>
+      </div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-snowflake"></i>
+      </div>
+      <p>Arctic</p>
+    </div>
+    <!-- <div class="filter">
             <div>
                 <i class="fa-solid fa-ship"></i>
             </div>
             <p>Boats</p>
         </div> -->
 
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
-            </div>
-        </div>
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+        <label class="form-check-label" for="flexSwitchCheckDefault"
+          >Display total after taxes</label
+        >
+      </div>
+    </div>
+  </div>
+  <!-- Add more filter inputs as needed -->
+</div>
 
-    </div>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-     <% for(let listing of allListings) { %>
-        <a href="/listings/<%= listing._id %>">
-        <div class="card col listing-card">
-        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem"/>
-        <div class="card-img-overlay"></div>
-        <div class="card-body">
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% for(let listing of allListings) { %>
+  <a href="/listings/<%= listing._id %>">
+    <div class="card col listing-card">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top"
+        alt="listing_image"
+        style="height: 20rem"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
         <p class="card-text">
-            <b><%= listing.title %></b> <br>
-            &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> / night
-            <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+          <b><%= listing.title %></b> <br />
+          &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") :
+          "N/A" %> / night
+          <i class="tax-info" style="color: rgb(138, 112, 115)">
+            &nbsp; &nbsp; +18% GST</i
+          >
         </p>
-        </div>
-       </div>
-    <% } %>
-    </a>
+      </div>
     </div>
+    <% } %>
+  </a>
+</div>
 
 <script>
-    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-    taxSwitch.addEventListener("click", () => {
-        let taxInfo = document.getElementsByClassName("tax-info");
-        for(info of taxInfo) {
-            if(info.style.display != "inline") {
-               info.style.display = "inline";
-            } else {
-                info.style.display = "none";
-            }
-        }
-    });
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
 </script>
