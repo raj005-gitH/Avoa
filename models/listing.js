@@ -7,7 +7,7 @@ const listingSchema = new Schema({
     title: {
         type : String,
         required: true,
-    },    
+    },
     description: String,
     image:{
         url: String,
@@ -24,7 +24,7 @@ const listingSchema = new Schema({
     ],
     owner : {
         type: Schema.Types.ObjectId,
-        ref: "User",        
+        ref: "User",
     },
     geometry: {
         type: {
