@@ -1,31 +1,55 @@
 <% layout('/layouts/boilerplate') %>
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="min-height: 85vh"
+>
   <div class="col-md-6 col-lg-5 p-5 shadow-sm rounded-4 border bg-white">
-    <h2 class="text-center mb-4 fw-semibold" style="font-family: 'Circular Std', sans-serif;">Log in to Wanderlust</h2>
+    <h2
+      class="text-center mb-4 fw-semibold"
+      style="font-family: &quot;Circular Std&quot;, sans-serif"
+    >
+      Welcome back to Avoa!
+    </h2>
 
     <form action="/login" method="POST" class="needs-validation" novalidate>
       <div class="mb-3">
         <label for="username" class="form-label fw-semibold">Username</label>
-        <input name="username" id="username" type="text" class="form-control form-control-lg" placeholder="Enter your username" required>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Enter your username"
+          required
+        />
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label fw-semibold">Password</label>
-        <input name="password" id="password" type="password" class="form-control form-control-lg" placeholder="Enter your password" required>
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="form-control form-control-lg"
+          placeholder="Enter your password"
+          required
+        />
       </div>
 
-      <button type="submit" class="btn btn-dark w-100 py-2 mt-3 rounded-3">Login</button>
+      <button type="submit" class="btn btn-dark w-100 py-2 mt-3 rounded-3">
+        Login
+      </button>
     </form>
 
     <p class="text-center mt-4">
-      New to Wanderlust? 
-      <a href="/signup" class="text-decoration-none text-danger fw-semibold">Sign up</a>
+      New to Avoa?
+      <a href="/signup" class="text-decoration-none text-danger fw-semibold"
+        >Sign up</a
+      >
     </p>
   </div>
 </div>
-
-
 
 <!-- <% layout('/layouts/boilerplate') %>
 
