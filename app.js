@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV != "production") {
     require('dotenv').config();
 }
 
@@ -36,12 +36,12 @@ const apiPaymentRouter = require("./routes/api/payments.js");
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
-   .then(() => {
-    console.log("connected to DB");
-   })
-   .catch((err) => {
-    console.log(err);
-   });
+    .then(() => {
+        console.log("connected to DB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 async function main() {
     await mongoose.connect(dbUrl);
@@ -49,7 +49,7 @@ async function main() {
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // needed for API JSON request bodies
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
@@ -81,7 +81,7 @@ const sessionOptions = {
     cookie: {
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly : true,
+        httpOnly: true,
     }
 }
 
@@ -129,7 +129,7 @@ if (fs.existsSync(clientDistPath)) {
     app.use(express.static(clientDistPath));
 
     // Client-side routing: All non-API, non-legacy page requests serve React's index.html
-    app.get("*", (req, res, next) => {
+    app.get("/{*splat}", (req, res, next) => {
         if (req.originalUrl.startsWith("/api") || req.originalUrl.startsWith("/legacy")) {
             return next();
         }
