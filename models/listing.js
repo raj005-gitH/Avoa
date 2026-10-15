@@ -39,6 +39,7 @@ const listingSchema = new Schema({
     }
 });
 
+//what it does?
 listingSchema.post("findOneAndDelete", async (listing) => {
     if(listing) {
         await Review.deleteMany({ _id : {$in : listing.reviews}});

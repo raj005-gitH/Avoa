@@ -7,6 +7,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const path = require("path");
+const fs = require("fs");
 const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const ExpressError = require("./utils/ExpressError.js");
@@ -16,12 +17,19 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 
-
+// --- Existing EJS routes (unchanged) ---
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+
+// --- New JSON API routes ---
+const apiListingRouter = require("./routes/api/listings.js");
+const apiReviewRouter = require("./routes/api/reviews.js");
+const apiUserRouter = require("./routes/api/users.js");
+const apiPaymentRouter = require("./routes/api/payments.js");
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -42,9 +50,16 @@ async function main() {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
+app.use(express.json()); // needed for API JSON request bodies
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+
+// CORS — allow requests from the React/Vite dev server and production frontend
+app.use(cors({
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+    credentials: true, // allow cookies (session) to be sent cross-origin
+}));
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -102,6 +117,30 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // });
 
+// --- JSON API routes (new — used by React frontend) ---
+app.use("/api/listings", apiListingRouter);
+app.use("/api/listings/:id/reviews", apiReviewRouter);
+app.use("/api/auth", apiUserRouter);
+app.use("/api/payment", apiPaymentRouter);
+
+// --- Serve React Frontend (when client/dist exists, e.g. on Render) ---
+const clientDistPath = path.join(__dirname, "client", "dist");
+if (fs.existsSync(clientDistPath)) {
+    app.use(express.static(clientDistPath));
+
+    // Client-side routing: All non-API, non-legacy page requests serve React's index.html
+    app.get("*", (req, res, next) => {
+        if (req.originalUrl.startsWith("/api") || req.originalUrl.startsWith("/legacy")) {
+            return next();
+        }
+        res.sendFile(path.join(clientDistPath, "index.html"));
+    });
+}
+
+// --- Legacy EJS routes (available at /legacy or if React is not built) ---
+app.use("/legacy/listings", listingRouter);
+app.use("/legacy/listings/:id/reviews", reviewRouter);
+app.use("/legacy", userRouter);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
@@ -110,11 +149,13 @@ app.use((req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
 });
 
-//Error handling middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
+    if (req.originalUrl.startsWith("/api")) {
+        return res.status(statusCode).json({ success: false, error: message, message });
+    }
     res.status(statusCode).render("error.ejs", { message });
-    // res.status(statusCode).send(message);
 });
 
 app.listen(PORT, () => {
